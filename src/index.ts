@@ -513,6 +513,7 @@ export class Loader {
       language: this.language,
       region: this.region,
       authReferrerPolicy: this.authReferrerPolicy,
+      mapsSolutionId: this.mapsSolutionId,
     };
     // keep the URL minimal:
     Object.keys(params).forEach(
