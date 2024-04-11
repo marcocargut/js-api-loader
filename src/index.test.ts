@@ -60,8 +60,8 @@ test.each([
     "https://maps.googleapis.com/maps/api/js?callback=__googleMapsCallback&loading=async&auth_referrer_policy=origin",
   ],
   [
-    { apiKey: "foo", mapsSolutionId: "bar"},
-    "https://maps.googleapis.com/maps/api/js?callback=__googleMapsCallback&loading=async&key=foo&maps_solution_id=bar",
+    { apiKey: "foo", solutionId: "bar"},
+    "https://maps.googleapis.com/maps/api/js?callback=__googleMapsCallback&loading=async&key=foo&solution_id=bar",
   ],
 ])("createUrl is correct", (options: LoaderOptions, expected: string) => {
   const loader = new Loader(options);
@@ -131,8 +131,8 @@ test("setScript adds a script to head with valid src with libraries", async () =
   );
 });
 
-test("setScript adds a script to head with mapsSolutionId", async () => {
-  const loader = new Loader({ apiKey: "foo", libraries: ["marker", "places"], mapsSolutionId: "bar" });
+test("setScript adds a script to head with solutionId", async () => {
+  const loader = new Loader({ apiKey: "foo", libraries: ["marker", "places"], solutionId: "bar" });
 
   loader["setScript"]();
   await 0;
@@ -140,7 +140,7 @@ test("setScript adds a script to head with mapsSolutionId", async () => {
   const script = document.head.childNodes[0] as HTMLScriptElement;
 
   expect(script.src).toEqual(
-    "https://maps.googleapis.com/maps/api/js?libraries=marker%2Cplaces&key=foo&maps_solution_id=bar&callback=google.maps.__ib__"
+    "https://maps.googleapis.com/maps/api/js?libraries=marker%2Cplaces&key=foo&solution_id=bar&callback=google.maps.__ib__"
   );
 });
 

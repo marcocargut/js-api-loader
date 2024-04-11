@@ -177,7 +177,7 @@ export interface LoaderOptions {
    */
   authReferrerPolicy?: "origin";
 
-  mapsSolutionId?: string;
+  solutionId?: string;
 }
 
 /**
@@ -269,7 +269,7 @@ export class Loader {
    */
   public readonly authReferrerPolicy: "origin";
 
-  public readonly mapsSolutionId: string | null;
+  public readonly solutionId: string | null;
 
   private callbacks: ((e: ErrorEvent) => void)[] = [];
   private done = false;
@@ -300,7 +300,7 @@ export class Loader {
     retries = 3,
     url = "https://maps.googleapis.com/maps/api/js",
     version,
-    mapsSolutionId = null
+    solutionId = null
   }: LoaderOptions) {
     this.apiKey = apiKey;
     this.authReferrerPolicy = authReferrerPolicy;
@@ -315,7 +315,7 @@ export class Loader {
     this.retries = retries;
     this.url = url;
     this.version = version;
-    this.mapsSolutionId = mapsSolutionId;
+    this.solutionId = solutionId;
 
     if (Loader.instance) {
       if (!isEqual(this.options, Loader.instance.options)) {
@@ -413,8 +413,8 @@ export class Loader {
       url += `&auth_referrer_policy=${this.authReferrerPolicy}`;
     }
 
-    if (this.mapsSolutionId) {
-      url += `&maps_solution_id=${this.mapsSolutionId}`;
+    if (this.solutionId) {
+      url += `&solution_id=${this.solutionId}`;
     }
 
     return url;
@@ -513,7 +513,7 @@ export class Loader {
       language: this.language,
       region: this.region,
       authReferrerPolicy: this.authReferrerPolicy,
-      mapsSolutionId: this.mapsSolutionId,
+      solutionId: this.solutionId,
     };
     // keep the URL minimal:
     Object.keys(params).forEach(
